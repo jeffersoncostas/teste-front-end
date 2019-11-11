@@ -1,8 +1,6 @@
-import React, { useState, createRef } from 'react';
+import React, { useState } from 'react';
 
 import {
-    FormControl,
-    TextField,
     Paper,
     IconButton,
     InputBase
@@ -11,9 +9,10 @@ import {
 import { Search as SearchIcon } from '@material-ui/icons';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
-import { SearchActionType } from '../../store/reducers/search';
-import { JSXElement } from '@babel/types';
+
 import { States } from '../../store/reducers';
+import { getSearchData } from '../../services/api';
+import { SearchActionType } from '../../store/reducers/search';
 
 const Container = styled(Paper)`
     display: flex;
@@ -25,26 +24,19 @@ const Container = styled(Paper)`
     }
 `;
 
-const Search = () => {
-    const searchState = useSelector((state: States) => state.search);
-    const [term, setTerm] = useState('');
-    const dispatch = useDispatch();
-
-    function onClickSearch() {
-        console.log(searchState);
-        dispatch({ type: SearchActionType.ON_SEARCH, searchTerm: term });
-    }
+const Search = (props: { onClickSearch: () => any; placeholder: string, term: string, setTerm: (e: any) => any }) => {
+    const { onClickSearch, placeholder, term, setTerm } = props;
 
     return (
         <Container>
             <InputBase
-                placeholder="Pesquisar"
+                placeholder={placeholder}
                 value={term}
                 onChange={e => setTerm(e.target.value)}
                 onKeyPress={e => (e.which == 13 ? onClickSearch() : null)}
             />
 
-            <IconButton onClick={onClickSearch}>
+            <IconButton onClick={() => onClickSearch()}>
                 <SearchIcon />
             </IconButton>
         </Container>

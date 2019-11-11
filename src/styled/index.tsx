@@ -14,8 +14,11 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const Background = styled.div`
-    background: white;
-    height: 100%;
+    
+    min-height: 100%;
+    display:flex;
+    flex-direction: column;
+    background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
 `;
 
 export { GlobalStyle, Background };
