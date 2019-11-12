@@ -1,14 +1,20 @@
 import React from 'react';
 import { GlobalStyle } from './styled';
-import { Routing } from './routes';
+import { CssBaseline } from '@material-ui/core';
+import Routing from './routes';
+import { Provider } from 'react-redux';
+import store from './store';
 
-const App = () => {
+
+
+export default function App() {
     return (
         <>
+            <CssBaseline />
             <GlobalStyle />
-            <Routing />
+            <Provider store={store}>
+                <Routing />
+            </Provider>
         </>
     );
-};
-
-export default App;
+}
